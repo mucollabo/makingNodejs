@@ -13,8 +13,8 @@ app.use(express.urlencoded({extended: true}));
 
 // setting routing
 app.get('/search/blog', (req, res) => {
-    const client_id = 'MlijIwuqG_buu9KEuqe0';
-    const client_secret = '3YPEWWF7XD';
+    const client_id = '****';
+    const client_secret = '****';
     const api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI('코스피'); //encodeURI(req.query.query);
     const option = {
     };
