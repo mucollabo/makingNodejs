@@ -1,6 +1,7 @@
 const morgan = require('morgan');
 const url = require('url');
 const uuidAPIkey = require('uuid-apikey');
+const cors = require('cors');
 
 // express app generate
 const express = require('express');
@@ -13,6 +14,7 @@ app.set('port', process.env.PORT || 8080);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // API key for Test
 const key = {
@@ -86,8 +88,8 @@ app.get('/board/:apikey/:type', (req, res) => {
     const queryData = url.parse(req.url, true).query;
 
     // prevent CORS
-    res.setHeader('Access-Control-Allow-Origin', 'localhost:3000');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    // res.setHeader('Access-Control-Allow-Origin', 'localhost:3000');
+    // res.setHeader('Access-Control-Allow-Credentials', true);
 
     if (uuidAPIkey.isAPIKey(apikey) && uuidAPIkey.check(apikey, key.uuid)) {
         if (type === 'search') {   // search with keyword
