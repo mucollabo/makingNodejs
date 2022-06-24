@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="vieport" content="width=device-width, initial-scale=1.0" />
+        <title>WebSocket</title>
+    </head>
+    <body>
+        <div>Let's learning the WebSocket with ws </div>
+        <script>
+            const webSocket = new WebSocket("ws://localhost:8080");   // ws protocol
+            webSocket.onopen = function () {
+                console.log("Web Socket Connected");
+            };
+            webSocket.onmessage = function (event) {
+                console.log(event.data);
+                webSocket.send("This Message From Client");
+            };
+        </script>
+    </body>
+</html>
