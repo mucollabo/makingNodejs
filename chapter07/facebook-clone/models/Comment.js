@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let CommentSchema = new mongoose.Schema({
+let CommentSchema = new mongoose.Schema({    // comments schema
     content: String,
     likes: Number,
     creator: {

@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const socket = require('socket.io');
-const dotenv = require('doctenv');
+const dotenv = require('dotenv');
 const flash = require('connect-flash');
 const Post = require('./models/Post')
 const User = require('./models/User');
@@ -34,7 +34,7 @@ app.use(flash());
 // passport setup
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(user.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
