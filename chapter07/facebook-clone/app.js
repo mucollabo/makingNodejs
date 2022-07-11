@@ -79,7 +79,7 @@ const io = socket(server);
 
 const room = io.of("/chat");
 room.on("connection", socket => {
-    console.log("new user : ", socket.io);
+    console.log("new user : ", socket.id);
 
     room.emit("newUser", { socketID: socket.id });
 
@@ -100,9 +100,9 @@ room.on("connection", socket => {
 
     socket.on("chat", data => {
         console.log(data);
-        if (data.io === "Global Chat") {
+        if (data.to === "Global Chat") {
             room.emit("chat", data);
-        } else if (data.io) {
+        } else if (data.to) {
             room.to(onlineChatUsers[data.name]).emit("chat", data);
             room.to(onlineChatUsers[data.to]).emit("chat", data);
         }
