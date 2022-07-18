@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 let UserSchema = new mongoose.Schema({   // user schema
     username: String,
@@ -14,14 +14,14 @@ let UserSchema = new mongoose.Schema({   // user schema
         }
     ],
 
-    linked_posts: [
+    liked_posts: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"
         }
     ],
 
-    linked_comments: [
+    liked_comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"

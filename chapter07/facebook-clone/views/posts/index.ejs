@@ -7,7 +7,6 @@
 <% } else { %>
     <p>Hello <span class="text-muted">guest</span>. Would you like to <a style="text-decoration: none;" href="/user/register">register</a> or <a style="text-decoration: none;" href="/user/login">login</a>?</p>
 <% } %>
-
 <% if (posts) { %>
 <main>
     <section class="news-feed">
@@ -40,8 +39,6 @@
         </article>
     <% }) %>
     </section>
-
 </main>
 <% } %>
-
 <% include('../partials/footer') %>

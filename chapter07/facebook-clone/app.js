@@ -1,28 +1,28 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const session = require('express-session');
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const socket = require('socket.io');
-const dotenv = require('dotenv');
-const flash = require('connect-flash');
-const Post = require('./models/Post')
-const User = require('./models/User');
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const socket = require("socket.io");
+const dotenv = require("dotenv");
+const flash = require("connect-flash");
+const Post = require("./models/Post");
+const User = require("./models/User");
 
 const port = process.env.PORT || 3000;
 const onlineChatUsers = {};
 
 dotenv.config();
 
-const postRoutes = require('./routes/posts');
-const userRoutes = require('./routes/users');
+const postRoutes = require("./routes/posts");
+const userRoutes = require("./routes/users");
 const app = express();
 
 app.set("view engine", "ejs");
 
-// middle ware
-app.use(cookieParser(process.env.SECRET));
+/* Middleware */
+app.use(cookieParser(process.env.SECRET))
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
@@ -31,19 +31,19 @@ app.use(session({
 );
 app.use(flash());
 
-// passport setup
+/* Passport setup */
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Middleware
+/* Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// MongoDB Connection
+/* MongoDB Connection */
 mongoose
     .connect("mongodb://127.0.0.1:27017/facebook_clone", {
         useNewUrlParser: true,
@@ -57,7 +57,7 @@ mongoose
         console.log(err);
     });
 
-// sending variation to Template file
+/* Template 파일에 변수 전송 */
 app.use((req, res, next) => {
     res.locals.user = req.user;
     res.locals.login = req.isAuthenticated();
@@ -66,7 +66,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routers
+/* Routers */
 app.use("/", userRoutes);
 app.use("/", postRoutes);
 
@@ -74,7 +74,7 @@ const server = app.listen(port, () => {
     console.log("App is running on port " + port);
 });
 
-// WebSocket setup
+/* WebSocket setup */
 const io = socket(server);
 
 const room = io.of("/chat");
